@@ -1,11 +1,7 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import logo from '../assets/iconmonstr-crosshair-11-64.png';
-import { Link, useHistory } from 'react-router-dom';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { ProfileDropDown } from '../components/ProfileDropDown';
-import Swal from 'sweetalert2';
-
+import logo from '../assets/kocaeli___niversitesi-logo-440B6.png';
+import { Link} from 'react-router-dom';
 
 const StyledHeader = styled.div`
     height: 10%;
@@ -78,18 +74,6 @@ const StyledHeader = styled.div`
 `;
 
 export const Header = () => {
-    const [user, setUser] = useLocalStorage('user');
-    const history = useHistory();
-
-    const handleLogin = useCallback(()=>{
-        history.push("/login");
-    }, [history])
-
-    const handleLogout = useCallback(()=>{
-        setUser("");
-        history.push("/");
-        Swal.fire('Çıkış Yaptınız');
-    }, [setUser, history])
 
     return (
         <StyledHeader>
@@ -99,17 +83,9 @@ export const Header = () => {
             <nav className='menu-container'>
                 <ul>
                     <Link to="/">Anasayfa</Link>
-                    <Link to="/hakkimizda">Hakkımızda</Link>
                     <Link to="/iletisim">İletişim</Link>
-                    <Link to="/private">Haritalar</Link>
+                    <Link to="/map">Haritalar</Link>
                 </ul>
-                {user ? (
-                    <ProfileDropDown userName={user} handleLogout={handleLogout}/>
-                ) : (
-                    <button className="top-menu-btn" onClick={handleLogin}>
-                        Giriş Yap
-                    </button>
-                )}
             </nav>
         </StyledHeader>
     )
